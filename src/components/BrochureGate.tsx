@@ -63,7 +63,7 @@ export function BrochureGate({ pdfUrl, projectName, className, label = "Download
   };
 
   const inputCls =
-    "w-full rounded-md border border-border bg-background px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:py-2 sm:text-sm";
+    "w-full rounded-md border border-[#d9b45c44] bg-white/5 px-3 py-3 text-base text-[#f6f1e7] placeholder:text-[#837965] focus:outline-none focus:border-[#d9b45c] focus:bg-[#d9b45c14] sm:py-2 sm:text-sm";
 
   return (
     <>
