@@ -43,18 +43,26 @@ export function BrochureGate({ pdfUrl, projectName, className, label = "Download
       source: "brochure-gate",
       ...getAttribution(),
     };
+    // Open the PDF synchronously inside the user gesture so mobile Safari
+    // doesn't block the popup while the network insert is in flight.
+    const win = window.open("", "_blank", "noopener,noreferrer");
     const { error: insertErr } = await supabase.from("leads").insert(payload);
     setLoading(false);
     if (insertErr) {
+      if (win) win.close();
       setError(insertErr.message);
       return;
     }
+    if (win) {
+      win.location.href = pdfUrl;
+    } else {
+      window.location.href = pdfUrl;
+    }
     setOpen(false);
-    window.open(pdfUrl, "_blank", "noopener,noreferrer");
   };
 
   const inputCls =
-    "w-full rounded border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring";
+    "w-full rounded-md border border-border bg-background px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:py-2 sm:text-sm";
 
   return (
     <>
@@ -63,38 +71,48 @@ export function BrochureGate({ pdfUrl, projectName, className, label = "Download
       </button>
       {open && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur"
+          className="fixed inset-0 z-[100] flex items-end justify-center bg-black/70 p-0 backdrop-blur sm:items-center sm:p-4"
           onClick={(e) => {
             if (e.target === e.currentTarget) setOpen(false);
           }}
         >
-          <div className="w-full max-w-md rounded border border-border bg-card p-6 text-card-foreground shadow-lg">
-            <h3 className="text-lg font-semibold">Download {projectName} brochure</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Share your details to access the brochure instantly.
-            </p>
-            <form onSubmit={onSubmit} className="mt-4 space-y-3">
-              <input name="name" required placeholder="Full name" className={inputCls} />
-              <input name="email" type="email" required placeholder="Email" className={inputCls} />
-              <input name="phone" required placeholder="Phone" className={inputCls} />
+          <div className="max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-2xl border border-border bg-card p-5 text-card-foreground shadow-lg sm:rounded-xl sm:p-6">
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-lg font-semibold leading-tight">Download brochure</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{projectName}</p>
+              </div>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setOpen(false)}
+                className="-mr-1 -mt-1 rounded p-2 text-muted-foreground hover:bg-accent"
+              >
+                ✕
+              </button>
+            </div>
+            <form onSubmit={onSubmit} className="space-y-3">
+              <input name="name" required autoComplete="name" placeholder="Full name" className={inputCls} />
+              <input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="Email" className={inputCls} />
+              <input name="phone" required autoComplete="tel" inputMode="tel" placeholder="Phone" className={inputCls} />
               <label className="flex items-start gap-2 text-xs text-muted-foreground">
-                <input type="checkbox" name="consent_contact" required className="mt-1" />
+                <input type="checkbox" name="consent_contact" required className="mt-1 h-4 w-4 shrink-0" />
                 <span>I consent to being contacted via email and phone about my enquiry.</span>
               </label>
               <label className="flex items-start gap-2 text-xs text-muted-foreground">
-                <input type="checkbox" name="consent_privacy" required className="mt-1" />
+                <input type="checkbox" name="consent_privacy" required className="mt-1 h-4 w-4 shrink-0" />
                 <span>I have read and agree to the Privacy Policy.</span>
               </label>
               {error && <p className="text-xs text-destructive">{error}</p>}
-              <div className="flex gap-2">
+              <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row">
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="flex-1 rounded border border-border px-4 py-2 text-sm hover:bg-accent"
+                  className="w-full rounded-md border border-border px-4 py-3 text-sm hover:bg-accent sm:flex-1 sm:py-2"
                 >
                   Cancel
                 </button>
-                <button type="submit" disabled={loading} className="btn-primary flex-1">
+                <button type="submit" disabled={loading} className="btn-primary w-full py-3 sm:flex-1 sm:py-2">
                   {loading ? "Sending…" : "Get Brochure"}
                 </button>
               </div>
