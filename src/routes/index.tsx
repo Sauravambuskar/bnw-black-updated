@@ -336,7 +336,11 @@ function Index() {
                     {p.meta.map((m) => <span key={m}>{m}</span>)}
                   </div>
                   <div className="project-actions">
-                    <a href="#contact">Download Brochure</a>
+                    {BROCHURES[p.name] ? (
+                      <BrochureGate pdfUrl={BROCHURES[p.name]} projectName={p.name} className="bnw-link" />
+                    ) : (
+                      <a href="#contact">Request Details</a>
+                    )}
                     <a href="#contact" className="reserve">Reserve Unit</a>
                   </div>
                 </div>
