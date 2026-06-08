@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LeadForm } from "@/components/LeadForm";
 import { BrochureGate } from "@/components/BrochureGate";
+import bnwLogo from "@/assets/bnw-logo.png.asset.json";
 
 const BROCHURES: Record<string, string> = {
   "Taj Wellington Mews": "https://bnwlpage.lovable.app/__l5e/assets-v1/737d88f6-8ff7-4458-af7f-4461d2db563a/taj-brochure.pdf",
