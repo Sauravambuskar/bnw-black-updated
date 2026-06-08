@@ -6,7 +6,7 @@ import bnwLogo from "@/assets/bnw-logo.png.asset.json";
 const BROCHURES: Record<string, string> = {
   "Taj Wellington Mews": "https://bnwlpage.lovable.app/__l5e/assets-v1/737d88f6-8ff7-4458-af7f-4461d2db563a/taj-brochure.pdf",
   "Tonino Lamborghini Residences": "https://bnwlpage.lovable.app/__l5e/assets-v1/1c79d913-4ac8-45ef-bfa0-27a695f23626/lamborghini-brochure.pdf",
-  "Radisson Blu Residences": "https://bnwlpage.lovable.app/__l5e/assets-v1/69fd792f-c6e8-4345-a5ab-b04fed2f69b5/radisson-brochure.pdf",
+  "Radisson Blu Dubai Central": "https://bnwlpage.lovable.app/__l5e/assets-v1/69fd792f-c6e8-4345-a5ab-b04fed2f69b5/radisson-brochure.pdf",
 };
 
 export const Route = createFileRoute("/")({
@@ -235,18 +235,24 @@ const projects = [
   {
     tag: "Al Marjan Island",
     name: "Taj Wellington Mews",
+    brand: "Taj",
+    tagline: "Heritage · Wellness",
     desc: "Taj-branded twin-tower hotel apartments on Al Marjan Island, built around ocean views, refined hospitality, spa, dining, and a premium short-stay rental narrative near the Wynn growth corridor.",
     meta: ["From AED 1.5M", "336 units", "Q1 2028"],
   },
   {
     tag: "RAK Central",
-    name: "Radisson Blu Residences",
+    name: "Radisson Blu Dubai Central",
+    brand: "Radisson Blu",
+    tagline: "Urban · Resort",
     desc: "Hospitality-led branded residences and hotel living in RAK Central, positioned for the emirate's business, leisure, and live-work-play demand as Ras Al Khaimah scales up.",
     meta: ["From AED 1.12M", "222 apartments", "Q4 2029"],
   },
   {
     tag: "Al Marjan Island",
     name: "Tonino Lamborghini Residences",
+    brand: "Tonino Lamborghini",
+    tagline: "Italian Craftsmanship",
     desc: "Italian-inspired waterfront residences, penthouses, villas, and mansions on Al Marjan Island, made for buyers seeking a more expressive luxury address with resort-style wellness amenities.",
     meta: ["From AED 1.69M", "378 units", "Q4 2028"],
   },
@@ -370,6 +376,11 @@ function Index() {
                   <div className="project-index">{String(i + 1).padStart(2, "0")}</div>
                   <span className="tag">{p.tag}</span>
                   <h4>{p.name}</h4>
+                  {p.brand && (
+                    <p style={{ color: "#d9b45c", fontSize: 11, fontWeight: 800, letterSpacing: ".14em", textTransform: "uppercase", margin: "-6px 0 10px" }}>
+                      {p.brand} · {p.tagline}
+                    </p>
+                  )}
                   <p>{p.desc}</p>
                   <div className="project-meta">
                     {p.meta.map((m) => <span key={m}>{m}</span>)}
