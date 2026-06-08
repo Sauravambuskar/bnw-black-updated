@@ -228,10 +228,9 @@ function Index() {
       <style dangerouslySetInnerHTML={{ __html: styles }} />
       <div className="page">
         <nav className="nav">
-          <div className="logo-fallback">
-            BNW
-            <small>Developments</small>
-          </div>
+          <a href="#opportunity" aria-label="BNW Developments home">
+            <img src={bnwLogo.url} alt="BNW Developments" className="brand-logo" />
+          </a>
           <ul className="nav-links">
             <li><a href="#opportunity">Opportunity</a></li>
             <li><a href="#why">Why BNW</a></li>
