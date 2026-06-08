@@ -361,7 +361,7 @@ function Index() {
         </section>
 
         <footer className="footer">
-          <div className="logo-fallback">BNW<small>Developments</small></div>
+          <img src={bnwLogo.url} alt="BNW Developments" className="brand-logo" />
           <p>BNW Developments investor information. Possible returns are projections and not guaranteed; final details are subject to availability, fees, and market conditions.</p>
         </footer>
       </div>
