@@ -14,7 +14,117 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          consent_contact: boolean
+          consent_privacy: boolean
+          created_at: string
+          email: string
+          id: string
+          landing_page: string | null
+          message: string | null
+          name: string
+          phone: string
+          project: string | null
+          referrer: string | null
+          source: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          consent_contact?: boolean
+          consent_privacy?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          landing_page?: string | null
+          message?: string | null
+          name: string
+          phone: string
+          project?: string | null
+          referrer?: string | null
+          source?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          consent_contact?: boolean
+          consent_privacy?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          landing_page?: string | null
+          message?: string | null
+          name?: string
+          phone?: string
+          project?: string | null
+          referrer?: string | null
+          source?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      page_visits: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          id: string
+          ip: string | null
+          landing_page: string | null
+          referrer: string | null
+          region: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          ip?: string | null
+          landing_page?: string | null
+          referrer?: string | null
+          region?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          ip?: string | null
+          landing_page?: string | null
+          referrer?: string | null
+          region?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
