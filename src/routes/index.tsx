@@ -376,6 +376,11 @@ function Index() {
                   <div className="project-index">{String(i + 1).padStart(2, "0")}</div>
                   <span className="tag">{p.tag}</span>
                   <h4>{p.name}</h4>
+                  {p.brand && (
+                    <p style={{ color: "#d9b45c", fontSize: 11, fontWeight: 800, letterSpacing: ".14em", textTransform: "uppercase", margin: "-6px 0 10px" }}>
+                      {p.brand} · {p.tagline}
+                    </p>
+                  )}
                   <p>{p.desc}</p>
                   <div className="project-meta">
                     {p.meta.map((m) => <span key={m}>{m}</span>)}
