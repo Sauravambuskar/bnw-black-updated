@@ -51,13 +51,13 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
   }
 
   const inputCls =
-    "w-full rounded border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring";
+    "w-full rounded-md border border-border bg-background px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:py-2 sm:text-sm";
 
   return (
     <form onSubmit={onSubmit} className={compact ? "space-y-2" : "space-y-3"}>
-      <input name="name" required placeholder="Full name" className={inputCls} />
-      <input name="email" type="email" required placeholder="Email" className={inputCls} />
-      <input name="phone" required placeholder="Phone" className={inputCls} />
+      <input name="name" required autoComplete="name" placeholder="Full name" className={inputCls} />
+      <input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="Email" className={inputCls} />
+      <input name="phone" required autoComplete="tel" inputMode="tel" placeholder="Phone" className={inputCls} />
       <select name="project" defaultValue={defaultProject} className={inputCls}>
         <option value="">Project of interest</option>
         {PROJECTS.map((p) => (
@@ -66,17 +66,18 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
       </select>
       <textarea name="message" placeholder="Message (optional)" rows={3} className={inputCls} />
       <label className="flex items-start gap-2 text-xs text-muted-foreground">
-        <input type="checkbox" name="consent_contact" required className="mt-1" />
+        <input type="checkbox" name="consent_contact" required className="mt-1 h-4 w-4 shrink-0" />
         <span>I consent to being contacted via email and phone about my enquiry.</span>
       </label>
       <label className="flex items-start gap-2 text-xs text-muted-foreground">
-        <input type="checkbox" name="consent_privacy" required className="mt-1" />
+        <input type="checkbox" name="consent_privacy" required className="mt-1 h-4 w-4 shrink-0" />
         <span>I have read and agree to the Privacy Policy.</span>
       </label>
       {error && <p className="text-xs text-destructive">{error}</p>}
-      <button type="submit" disabled={loading} className="btn-primary w-full">
+      <button type="submit" disabled={loading} className="btn-primary w-full py-3 sm:py-2">
         {loading ? "Sending…" : "Send Request"}
       </button>
     </form>
   );
 }
+
