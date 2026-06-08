@@ -1,4 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { LeadForm } from "@/components/LeadForm";
+import { BrochureGate } from "@/components/BrochureGate";
+
+const BROCHURES: Record<string, string> = {
+  "Taj Wellington Mews": "https://bnwlpage.lovable.app/__l5e/assets-v1/737d88f6-8ff7-4458-af7f-4461d2db563a/taj-brochure.pdf",
+  "Tonino Lamborghini Residences": "https://bnwlpage.lovable.app/__l5e/assets-v1/1c79d913-4ac8-45ef-bfa0-27a695f23626/lamborghini-brochure.pdf",
+  "Radisson Blu Residences": "https://bnwlpage.lovable.app/__l5e/assets-v1/69fd792f-c6e8-4345-a5ab-b04fed2f69b5/radisson-brochure.pdf",
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -253,37 +261,11 @@ function Index() {
             </div>
           </div>
           <div className="lead-panel" id="contact">
-            <form className="form-card" onSubmit={(e) => e.preventDefault()}>
+            <div className="form-card">
               <h2>Request BNW availability</h2>
               <p>Receive current prices, floor plans, payment options, and rental-yield assumptions for BNW opportunities.</p>
-              <div className="field field-row">
-                <input type="text" placeholder="Full name" required />
-                <input type="tel" placeholder="Phone" required />
-              </div>
-              <div className="field"><input type="email" placeholder="Email address" required /></div>
-              <div className="field">
-                <select defaultValue="">
-                  <option value="" disabled>Project of interest</option>
-                  <option>Orvessa Residences by Michel Adam</option>
-                  <option>Taj Wellington Mews</option>
-                  <option>Radisson Blu Residences & Hotels</option>
-                  <option>Tonino Lamborghini Residences</option>
-                  <option>Compare BNW opportunities</option>
-                </select>
-              </div>
-              <div className="field">
-                <select defaultValue="">
-                  <option value="" disabled>Budget range</option>
-                  <option>AED 1M - 1.5M</option>
-                  <option>AED 1.5M - 2.5M</option>
-                  <option>AED 2.5M - 5M</option>
-                  <option>AED 5M+</option>
-                </select>
-              </div>
-              <div className="field"><textarea placeholder="Preferred project, unit size, or investment goal" /></div>
-              <button className="submit" type="submit">Send Request</button>
-              <p className="privacy">No obligation. Details are used only to respond to your investment enquiry.</p>
-            </form>
+              <LeadForm />
+            </div>
           </div>
         </section>
 
