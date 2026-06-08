@@ -7,7 +7,7 @@ interface Props {
   compact?: boolean;
 }
 
-const PROJECTS = ["Project A", "Project B", "Project C", "All"];
+const PROJECTS = ["Taj Wellington Mews", "Tonino Lamborghini Residences", "Radisson Blu Residences", "All projects"];
 
 export function LeadForm({ defaultProject = "", compact = false }: Props) {
   const [loading, setLoading] = useState(false);
