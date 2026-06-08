@@ -158,33 +158,69 @@ const styles = `
 .bnw .footer{padding:36px clamp(20px,5vw,76px);display:flex;justify-content:space-between;gap:20px;align-items:center;color:#8f846e;font-size:12px}
 @media (max-width:980px){
   .bnw .nav-links{display:none}
-  .bnw .hero{grid-template-columns:1fr;min-height:auto;padding-top:88px}
+  .bnw .hero{grid-template-columns:1fr;min-height:auto;padding:96px 24px 40px;gap:28px}
   .bnw .lead-panel{align-self:auto}
   .bnw .rationale-grid{grid-template-columns:repeat(2,1fr)}
-  .bnw .wynn-inner{grid-template-columns:1fr;min-height:620px;padding:30px;background-position:center}
+  .bnw .wynn-inner{grid-template-columns:1fr;min-height:auto;padding:30px;background-position:center;gap:24px;align-items:start}
+  .bnw .wynn-grid{align-self:auto}
   .bnw .project{grid-template-columns:1fr}
-  .bnw .project-media{min-height:360px}
+  .bnw .project-media{min-height:280px}
   .bnw .project-content{padding:30px}
   .bnw .section-head{display:block}
   .bnw .section-intro{margin-top:18px}
-  .bnw .return-strip{grid-template-columns:1fr}
-  .bnw .final-cta{grid-template-columns:1fr}
-  .bnw .footer{display:block}
+  .bnw .return-strip{grid-template-columns:1fr;gap:14px;padding:20px}
+  .bnw .final-cta{grid-template-columns:1fr;padding:70px 24px}
+  .bnw .footer{display:block;text-align:center}
   .bnw .footer p{margin-top:18px}
 }
-@media (max-width:560px){
-  .bnw .nav{padding:12px 18px}
-  .bnw .nav-action{min-height:38px;padding:0 12px;font-size:10px}
-  .bnw .hero{padding:92px 18px 42px}
-  .bnw .hero-text{font-size:16px}
-  .bnw .return-strip{padding:18px}
-  .bnw .form-card{padding:22px}
+@media (max-width:640px){
+  .bnw .nav{padding:12px 16px;gap:12px}
+  .bnw .nav-action{min-height:36px;padding:0 12px;font-size:10px;letter-spacing:.06em}
+  .bnw .brand-logo{height:32px}
+  .bnw .hero{padding:88px 18px 36px;gap:24px}
+  .bnw h1{font-size:38px;line-height:.95}
+  .bnw .hero-text{font-size:14.5px;margin-top:14px}
+  .bnw .return-strip{padding:16px}
+  .bnw .return-value{font-size:34px;text-align:left}
+  .bnw .return-copy strong{font-size:15px}
+  .bnw .return-copy p{font-size:11.5px}
+  .bnw .hero-proof{grid-template-columns:1fr;width:100%}
+  .bnw .proof-item{border-right:0;border-bottom:1px solid rgba(217,180,92,.2);padding:12px 14px}
+  .bnw .proof-item:last-child{border-bottom:0}
+  .bnw .proof-item b{font-size:22px}
+  .bnw .hero-actions{flex-direction:column;width:100%}
+  .bnw .hero-actions .btn{width:100%}
+  .bnw .form-card{padding:20px}
+  .bnw .form-card h2{font-size:24px}
   .bnw .field-row{grid-template-columns:1fr}
-  .bnw .section,.bnw .section.alt,.bnw .final-cta,.bnw .rationale-section{padding:64px 18px}
-  .bnw .rationale-grid{grid-template-columns:1fr}
-  .bnw h1{font-size:42px}
-  .bnw .return-value{font-size:50px}
-  .bnw .return-copy strong{font-size:16px}
+  .bnw .destination{padding:56px 18px}
+  .bnw .destination-quote{font-size:28px;line-height:1.1}
+  .bnw .destination-note{font-size:13px}
+  .bnw .wynn-section{padding:48px 16px}
+  .bnw .wynn-inner{padding:24px 20px;min-height:auto}
+  .bnw .wynn-title{font-size:32px}
+  .bnw .wynn-copy{font-size:13.5px;margin-top:14px}
+  .bnw .wynn-stat{padding:14px}
+  .bnw .wynn-stat b{font-size:28px}
+  .bnw .section,.bnw .section.alt{padding:64px 18px}
+  .bnw .rationale-section{padding:64px 18px}
+  .bnw .rationale-grid{grid-template-columns:1fr;gap:12px}
+  .bnw .reason-card{min-height:auto;padding:22px}
+  .bnw h3{font-size:34px;line-height:1.02}
+  .bnw .section-intro{font-size:14px}
+  .bnw .project{min-height:auto}
+  .bnw .project-media{min-height:220px}
+  .bnw .project-content{padding:24px 22px}
+  .bnw .project-index{font-size:34px;top:18px;right:22px}
+  .bnw .project h4{font-size:30px;line-height:1}
+  .bnw .project p{font-size:14px}
+  .bnw .project-actions{flex-direction:column;gap:8px}
+  .bnw .project-actions a{width:100%;min-width:0}
+  .bnw .final-cta{padding:64px 20px;gap:22px}
+  .bnw .final-cta h3{font-size:32px}
+  .bnw .final-cta p{font-size:14px}
+  .bnw .footer{padding:28px 18px;font-size:11.5px}
+  .bnw .footer .brand-logo{height:30px;margin:0 auto}
 }
 `;
 
