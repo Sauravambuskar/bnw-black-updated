@@ -89,7 +89,8 @@ const styles = `
 .bnw .form-card p{color:var(--muted);font-size:12.5px;line-height:1.55;margin-bottom:16px}
 .bnw .field{margin-bottom:10px}
 .bnw .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bnw input,.bnw select,.bnw textarea{width:100%;min-height:42px;border:1px solid rgba(217,180,92,.28);background:rgba(255,255,255,.04);color:var(--paper);font-family:var(--sans);font-size:13px;padding:0 13px;outline:none;border-radius:0}
+.bnw input:not([type="checkbox"]):not([type="radio"]),.bnw select,.bnw textarea{width:100%;min-height:42px;border:1px solid rgba(217,180,92,.28);background:rgba(255,255,255,.04);color:var(--paper);font-family:var(--sans);font-size:13px;padding:0 13px;outline:none;border-radius:0}
+.bnw input[type="checkbox"]{width:16px;height:16px;min-height:0;accent-color:var(--gold);cursor:pointer;flex-shrink:0}
 .bnw textarea{height:62px;padding-top:12px;resize:vertical}
 .bnw input::placeholder,.bnw textarea::placeholder{color:#837965}
 .bnw input:focus,.bnw select:focus,.bnw textarea:focus{border-color:var(--gold);background:rgba(217,180,92,.08)}
