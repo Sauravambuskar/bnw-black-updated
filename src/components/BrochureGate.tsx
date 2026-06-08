@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { getAttribution } from "@/lib/utm";
 
@@ -62,31 +63,32 @@ export function BrochureGate({ pdfUrl, projectName, className, label = "Download
   };
 
   const inputCls =
-    "w-full rounded-md border border-border bg-background px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:py-2 sm:text-sm";
+    "w-full rounded-md border border-[#d9b45c44] bg-white/5 px-3 py-3 text-base text-[#f6f1e7] placeholder:text-[#837965] focus:outline-none focus:border-[#d9b45c] focus:bg-[#d9b45c14] sm:py-2 sm:text-sm";
 
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} className={className}>
         {label}
       </button>
-      {open && (
+      {open && typeof document !== "undefined" && createPortal(
         <div
-          className="fixed inset-0 z-[100] flex items-end justify-center bg-black/70 p-0 backdrop-blur sm:items-center sm:p-4"
+          className="bnw-modal fixed inset-0 z-[100] flex items-end justify-center bg-black/70 p-0 backdrop-blur sm:items-center sm:p-4"
           onClick={(e) => {
             if (e.target === e.currentTarget) setOpen(false);
           }}
+          style={{ fontFamily: "'Inter','Segoe UI',Arial,sans-serif" }}
         >
-          <div className="max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-2xl border border-border bg-card p-5 text-card-foreground shadow-lg sm:rounded-xl sm:p-6">
+          <div className="max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-2xl border border-[#d9b45c33] bg-[#0c0b08] p-5 text-[#f6f1e7] shadow-2xl sm:rounded-xl sm:p-6">
             <div className="mb-4 flex items-start justify-between gap-3">
               <div>
-                <h3 className="text-lg font-semibold leading-tight">Download brochure</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{projectName}</p>
+                <h3 className="text-lg font-semibold leading-tight text-white" style={{ fontFamily: "'Cormorant Garamond',Georgia,serif" }}>Download brochure</h3>
+                <p className="mt-1 text-sm text-[#d9b45c]">{projectName}</p>
               </div>
               <button
                 type="button"
                 aria-label="Close"
                 onClick={() => setOpen(false)}
-                className="-mr-1 -mt-1 rounded p-2 text-muted-foreground hover:bg-accent"
+                className="-mr-1 -mt-1 rounded p-2 text-[#b9ad95] hover:bg-white/10"
               >
                 ✕
               </button>
@@ -95,30 +97,36 @@ export function BrochureGate({ pdfUrl, projectName, className, label = "Download
               <input name="name" required autoComplete="name" placeholder="Full name" className={inputCls} />
               <input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="Email" className={inputCls} />
               <input name="phone" required autoComplete="tel" inputMode="tel" placeholder="Phone" className={inputCls} />
-              <label className="flex items-start gap-2 text-xs text-muted-foreground">
-                <input type="checkbox" name="consent_contact" required className="mt-1 h-4 w-4 shrink-0" />
+              <label className="flex items-start gap-2 text-xs text-[#b9ad95]">
+                <input type="checkbox" name="consent_contact" required className="mt-1 h-4 w-4 shrink-0" style={{ accentColor: "#d9b45c" }} />
                 <span>I consent to being contacted via email and phone about my enquiry.</span>
               </label>
-              <label className="flex items-start gap-2 text-xs text-muted-foreground">
-                <input type="checkbox" name="consent_privacy" required className="mt-1 h-4 w-4 shrink-0" />
+              <label className="flex items-start gap-2 text-xs text-[#b9ad95]">
+                <input type="checkbox" name="consent_privacy" required className="mt-1 h-4 w-4 shrink-0" style={{ accentColor: "#d9b45c" }} />
                 <span>I have read and agree to the Privacy Policy.</span>
               </label>
-              {error && <p className="text-xs text-destructive">{error}</p>}
+              {error && <p className="text-xs text-red-400">{error}</p>}
               <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row">
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="w-full rounded-md border border-border px-4 py-3 text-sm hover:bg-accent sm:flex-1 sm:py-2"
+                  className="w-full rounded-md border border-[#d9b45c55] px-4 py-3 text-sm text-[#f6f1e7] hover:bg-white/5 sm:flex-1 sm:py-2"
                 >
                   Cancel
                 </button>
-                <button type="submit" disabled={loading} className="btn-primary w-full py-3 sm:flex-1 sm:py-2">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full rounded-md px-4 py-3 text-sm font-bold uppercase tracking-wider text-[#151008] sm:flex-1 sm:py-2 disabled:opacity-60"
+                  style={{ background: "#d9b45c" }}
+                >
                   {loading ? "Sending…" : "Get Brochure"}
                 </button>
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
