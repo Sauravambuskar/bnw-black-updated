@@ -120,6 +120,26 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    import("../lib/utm").then(({ captureAttribution, getAttribution }) => {
+      captureAttribution();
+      import("../lib/track-visit.functions").then(({ trackVisit }) => {
+        const a = getAttribution();
+        trackVisit({
+          data: {
+            landing_page: a.landing_page,
+            referrer: a.referrer,
+            utm_source: a.utm_source,
+            utm_medium: a.utm_medium,
+            utm_campaign: a.utm_campaign,
+            utm_term: a.utm_term,
+            utm_content: a.utm_content,
+          },
+        }).catch(() => {});
+      });
+    });
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
@@ -127,3 +147,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
