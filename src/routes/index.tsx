@@ -221,7 +221,7 @@ const styles = `
   .bnw .final-cta h3{font-size:32px}
   .bnw .final-cta p{font-size:14px}
   .bnw .footer{padding:28px 18px;font-size:11.5px}
-  .bnw .footer .brand-logo{height:30px;margin:0 auto}
+  .bnw .footer .brand-logo{height:46px;margin:0 auto}
 }
 `;
 
