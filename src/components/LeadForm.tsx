@@ -85,7 +85,12 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
         </span>
       </label>
       {error && <p className="text-xs text-destructive">{error}</p>}
-      <button type="submit" disabled={loading} className="btn-primary w-full rounded-none px-6 py-3 leading-tight">
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full rounded-none px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-[#151008] transition-opacity hover:opacity-90 disabled:opacity-60"
+        style={{ background: "#d9b45c" }}
+      >
         {loading ? "Sending…" : "Send Request"}
       </button>
     </form>
