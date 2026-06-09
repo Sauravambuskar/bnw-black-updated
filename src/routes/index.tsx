@@ -177,7 +177,7 @@ const styles = `
 @media (max-width:640px){
   .bnw .nav{padding:12px 16px;gap:12px}
   .bnw .nav-action{min-height:36px;padding:0 12px;font-size:10px;letter-spacing:.06em}
-  .bnw .brand-logo{height:32px}
+  .bnw .brand-logo{height:52px}
   .bnw .hero{padding:88px 18px 36px;gap:24px}
   .bnw h1{font-size:38px;line-height:.95}
   .bnw .hero-text{font-size:14.5px;margin-top:14px}
