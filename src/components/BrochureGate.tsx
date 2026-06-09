@@ -44,21 +44,35 @@ export function BrochureGate({ pdfUrl, projectName, className, label = "Download
       source: "brochure-gate",
       ...getAttribution(),
     };
-    // Open the PDF synchronously inside the user gesture so mobile Safari
-    // doesn't block the popup while the network insert is in flight.
-    const win = window.open("", "_blank", "noopener,noreferrer");
     const { error: insertErr } = await supabase.from("leads").insert(payload);
-    setLoading(false);
     if (insertErr) {
-      if (win) win.close();
+      setLoading(false);
       setError(insertErr.message);
       return;
     }
-    if (win) {
-      win.location.href = pdfUrl;
-    } else {
-      window.location.href = pdfUrl;
+    const filename = `${projectName.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-brochure.pdf`;
+    try {
+      const res = await fetch(pdfUrl);
+      if (!res.ok) throw new Error("Failed to fetch brochure");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch {
+      const a = document.createElement("a");
+      a.href = pdfUrl;
+      a.download = filename;
+      a.rel = "noopener noreferrer";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     }
+    setLoading(false);
     setOpen(false);
   };
 
