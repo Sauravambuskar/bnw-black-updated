@@ -53,8 +53,8 @@ const styles = `
 .bnw .nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px clamp(20px,4vw,64px);background:rgba(8,8,6,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
 .bnw .logo-fallback{color:var(--white);font-family:var(--serif);font-size:22px;font-weight:700;line-height:1}
 .bnw .logo-fallback small{display:block;color:var(--gold-soft);font-family:var(--sans);font-size:8px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
-.bnw .brand-logo{display:block;height:44px;width:auto;object-fit:contain}
-.bnw .footer .brand-logo{height:36px;opacity:.9}
+.bnw .brand-logo{display:block;height:72px;width:auto;object-fit:contain}
+.bnw .footer .brand-logo{height:56px;opacity:.9}
 .bnw .nav-links{display:flex;align-items:center;gap:26px;list-style:none;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .bnw .nav-links a:hover{color:var(--gold-soft)}
 .bnw .nav-action{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 18px;border:1px solid var(--gold);background:var(--gold);color:#151008;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:.25s ease;cursor:pointer}
@@ -177,7 +177,7 @@ const styles = `
 @media (max-width:640px){
   .bnw .nav{padding:12px 16px;gap:12px}
   .bnw .nav-action{min-height:36px;padding:0 12px;font-size:10px;letter-spacing:.06em}
-  .bnw .brand-logo{height:32px}
+  .bnw .brand-logo{height:52px}
   .bnw .hero{padding:88px 18px 36px;gap:24px}
   .bnw h1{font-size:38px;line-height:.95}
   .bnw .hero-text{font-size:14.5px;margin-top:14px}
@@ -221,7 +221,7 @@ const styles = `
   .bnw .final-cta h3{font-size:32px}
   .bnw .final-cta p{font-size:14px}
   .bnw .footer{padding:28px 18px;font-size:11.5px}
-  .bnw .footer .brand-logo{height:30px;margin:0 auto}
+  .bnw .footer .brand-logo{height:46px;margin:0 auto}
 }
 `;
 
