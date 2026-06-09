@@ -82,7 +82,7 @@ function csvEscape(v: unknown): string {
   return s;
 }
 
-function downloadCsv<T extends Record<string, unknown>>(
+function downloadCsv<T>(
   rows: T[],
   cols: Array<[keyof T, string]>,
   filename: string,
