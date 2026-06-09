@@ -285,7 +285,7 @@ function Index() {
 
         <section className="hero" id="opportunity">
           <div className="hero-copy">
-            <div className="eyebrow">BNW Developments UAE</div>
+            
             <h1>Earn <span>8-10% NET</span> potential returns through BNW branded residences.</h1>
             <p className="hero-text">Compare BNW opportunities across Dubai, RAK Central, and Al Marjan Island, with branded hospitality partnerships, freehold ownership, and long-term rental demand.</p>
             <div className="return-strip">
