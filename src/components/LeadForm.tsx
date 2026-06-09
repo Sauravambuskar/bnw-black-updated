@@ -71,10 +71,21 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
       </label>
       <label className="flex items-start gap-2 text-xs text-muted-foreground">
         <input type="checkbox" name="consent_privacy" required className="mt-1 h-4 w-4 shrink-0" />
-        <span>I have read and agree to the Privacy Policy.</span>
+        <span>
+          I have read and agree to the{" "}
+          <a
+            href="https://bnwdevelopments.com/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-foreground"
+          >
+            Privacy Policy of BNW Developments
+          </a>
+          .
+        </span>
       </label>
       {error && <p className="text-xs text-destructive">{error}</p>}
-      <button type="submit" disabled={loading} className="btn-primary w-full py-3 sm:py-2">
+      <button type="submit" disabled={loading} className="btn-primary w-full px-6 py-2.5 leading-tight">
         {loading ? "Sending…" : "Send Request"}
       </button>
     </form>

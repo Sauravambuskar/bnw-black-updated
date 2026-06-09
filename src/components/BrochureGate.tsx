@@ -117,7 +117,18 @@ export function BrochureGate({ pdfUrl, projectName, className, label = "Download
               </label>
               <label className="flex items-start gap-2 text-xs text-[#b9ad95]">
                 <input type="checkbox" name="consent_privacy" required className="mt-1 h-4 w-4 shrink-0" style={{ accentColor: "#d9b45c" }} />
-                <span>I have read and agree to the Privacy Policy.</span>
+                <span>
+                  I have read and agree to the{" "}
+                  <a
+                    href="https://bnwdevelopments.com/privacy-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 text-[#d9b45c] hover:text-[#f6f1e7]"
+                  >
+                    Privacy Policy of BNW Developments
+                  </a>
+                  .
+                </span>
               </label>
               {error && <p className="text-xs text-red-400">{error}</p>}
               <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row">
