@@ -65,6 +65,10 @@ const styles = `
 .bnw .hero-copy,.bnw .lead-panel{position:relative;z-index:2}
 .bnw .eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold-soft);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
 .bnw .eyebrow:before{content:"";width:34px;height:1px;background:var(--gold)}
+.bnw .hero-eyebrow{display:flex;align-items:center;justify-content:flex-start;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.bnw .hero-eyebrow .eyebrow-text{color:var(--gold-soft);font-size:clamp(12px,1.4vw,16px);font-weight:800;letter-spacing:.32em;text-transform:uppercase;white-space:nowrap}
+.bnw .hero-eyebrow .eyebrow-line{flex:0 0 48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+@media (max-width:640px){.bnw .hero-eyebrow{gap:10px;margin-bottom:16px}.bnw .hero-eyebrow .eyebrow-line{flex-basis:28px}.bnw .hero-eyebrow .eyebrow-text{letter-spacing:.24em}}
 .bnw h1{font-family:var(--serif);font-size:clamp(42px,5vw,72px);line-height:.9;font-weight:600;letter-spacing:0;max-width:780px;color:var(--white)}
 .bnw h1 span{color:var(--gold-soft);font-style:italic}
 .bnw .hero-text{max-width:650px;margin-top:18px;color:#d8ceb8;font-size:15.5px;line-height:1.58}
@@ -285,7 +289,11 @@ function Index() {
 
         <section className="hero" id="opportunity">
           <div className="hero-copy">
-            
+            <div className="hero-eyebrow">
+              <span className="eyebrow-line" aria-hidden="true" />
+              <span className="eyebrow-text">BNW DEVELOPMENTS UAE</span>
+              <span className="eyebrow-line" aria-hidden="true" />
+            </div>
             <h1>Earn <span>8-10% NET</span> potential returns through BNW branded residences.</h1>
             <p className="hero-text">Compare BNW opportunities across Dubai, RAK Central, and Al Marjan Island, with branded hospitality partnerships, freehold ownership, and long-term rental demand.</p>
             <div className="return-strip">
