@@ -139,9 +139,9 @@ const styles = `
 .bnw .project-media{position:relative;min-height:440px;background:#111;overflow:hidden}
 .bnw .project-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.54))}
 .bnw .project:nth-child(1) .project-media{background:url('https://bnw.ae/_next/static/media/left.375ea75a.png') center/cover no-repeat}
-.bnw .project:nth-child(2) .project-media{background:url('https://bnw.ae/_next/static/media/tajimg1.d0bea21c.jpeg') center/cover no-repeat}
-.bnw .project:nth-child(3) .project-media{background:url('https://bnw.ae/_next/static/media/visual.ed08598f.jpg') center/cover no-repeat}
-.bnw .project:nth-child(4) .project-media{background:url('https://bnw.ae/_next/static/media/image1.23d0e423.jpg') center/cover no-repeat}
+.bnw .project:nth-child(2) .project-media{background:url('/__l5e/assets-v1/999e049e-58c2-4b15-adaf-1e19b9f14572/taj.png') center/cover no-repeat}
+.bnw .project:nth-child(3) .project-media{background:url('/__l5e/assets-v1/dee350d8-346a-4519-a2c1-44660551db30/radisson.png') center/cover no-repeat}
+.bnw .project:nth-child(4) .project-media{background:url('/__l5e/assets-v1/3027eff9-81ea-4e87-a3b4-1176d144d00c/tonino.png') center/cover no-repeat}
 .bnw .project-content{position:relative;padding:42px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(12,11,8,.98),rgba(22,18,10,.92))}
 .bnw .project-index{position:absolute;top:28px;right:34px;font-family:var(--serif);font-size:46px;line-height:.9;color:rgba(240,213,139,.54)}
 .bnw .tag{display:inline-block;width:max-content;border:1px solid rgba(217,180,92,.45);color:var(--gold-soft);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:8px 10px;margin-bottom:18px}
