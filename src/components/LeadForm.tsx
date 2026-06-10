@@ -54,7 +54,7 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
     "w-full rounded-md border border-border bg-background px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:py-2 sm:text-sm";
 
   return (
-    <form onSubmit={onSubmit} className={compact ? "space-y-3" : "space-y-4"}>
+    <form onSubmit={onSubmit} className={compact ? "space-y-4" : "space-y-5"}>
       <input name="name" required autoComplete="name" placeholder="Full name" className={inputCls} />
       <input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="Email" className={inputCls} />
       <input name="phone" required autoComplete="tel" inputMode="tel" placeholder="Phone" className={inputCls} />
@@ -65,7 +65,7 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
         ))}
       </select>
       <textarea name="message" placeholder="Message (optional)" rows={3} className={inputCls} />
-      <label className="flex items-start gap-2 text-xs text-muted-foreground pt-2" style={{ marginBottom: "6px" }}>
+      <label className="flex items-start gap-2 text-xs text-muted-foreground pt-4" style={{ marginBottom: "12px" }}>
         <input type="checkbox" name="consent_contact" required className="mt-1 h-4 w-4 shrink-0" />
         <span>I consent to being contacted via email and phone about my enquiry.</span>
       </label>
@@ -88,7 +88,7 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
       <button
         type="submit"
         disabled={loading}
-        className="mt-2 w-full rounded-none px-8 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#151008] transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="mt-5 w-full rounded-none px-8 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#151008] transition-opacity hover:opacity-90 disabled:opacity-60"
         style={{ background: "#d9b45c" }}
       >
         {loading ? "Sending…" : "Send Request"}
