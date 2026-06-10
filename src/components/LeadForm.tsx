@@ -65,7 +65,7 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
         ))}
       </select>
       <textarea name="message" placeholder="Message (optional)" rows={3} className={inputCls} />
-      <label className="flex items-start gap-2 text-xs text-muted-foreground">
+      <label className="flex items-start gap-2 text-xs text-muted-foreground" style={{ marginBottom: "2mm" }}>
         <input type="checkbox" name="consent_contact" required className="mt-1 h-4 w-4 shrink-0" />
         <span>I consent to being contacted via email and phone about my enquiry.</span>
       </label>
