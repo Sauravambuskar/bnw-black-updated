@@ -54,8 +54,8 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
     "w-full rounded-md border border-border bg-background px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:py-2 sm:text-sm";
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col" style={{ gap: compact ? "34px" : "42px" }}>
-      <div className="flex flex-col" style={{ gap: compact ? "26px" : "34px" }}>
+    <form onSubmit={onSubmit} className="flex flex-col" style={{ gap: compact ? "18px" : "20px" }}>
+      <div className="flex flex-col" style={{ gap: compact ? "14px" : "16px" }}>
         <input name="name" required autoComplete="name" placeholder="Full name" className={inputCls} />
         <input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="Email" className={inputCls} />
         <input name="phone" required autoComplete="tel" inputMode="tel" placeholder="Phone" className={inputCls} />
