@@ -24,10 +24,13 @@ export type Database = {
           landing_page: string | null
           message: string | null
           name: string
+          notes: string | null
           phone: string
           project: string | null
           referrer: string | null
           source: string
+          status: string
+          updated_at: string
           utm_campaign: string | null
           utm_content: string | null
           utm_medium: string | null
@@ -43,10 +46,13 @@ export type Database = {
           landing_page?: string | null
           message?: string | null
           name: string
+          notes?: string | null
           phone: string
           project?: string | null
           referrer?: string | null
           source?: string
+          status?: string
+          updated_at?: string
           utm_campaign?: string | null
           utm_content?: string | null
           utm_medium?: string | null
@@ -62,10 +68,13 @@ export type Database = {
           landing_page?: string | null
           message?: string | null
           name?: string
+          notes?: string | null
           phone?: string
           project?: string | null
           referrer?: string | null
           source?: string
+          status?: string
+          updated_at?: string
           utm_campaign?: string | null
           utm_content?: string | null
           utm_medium?: string | null
