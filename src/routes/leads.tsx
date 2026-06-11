@@ -15,10 +15,13 @@ export const Route = createFileRoute("/leads")({
 interface Lead {
   id: string;
   created_at: string;
+  updated_at?: string | null;
   name: string;
   email: string;
   phone: string;
   project: string | null;
+  status: string;
+  notes: string | null;
   source: string;
   utm_source: string | null;
   utm_medium: string | null;
@@ -47,12 +50,16 @@ interface Visit {
   user_agent: string | null;
 }
 
+const STATUS_OPTIONS = ["new", "contacted", "qualified", "won", "lost"] as const;
+
 const LEAD_COLS: Array<[keyof Lead, string]> = [
   ["created_at", "Created"],
   ["name", "Name"],
   ["email", "Email"],
   ["phone", "Phone"],
   ["project", "Project"],
+  ["status", "Status"],
+  ["notes", "Notes"],
   ["source", "Source"],
   ["utm_source", "UTM Source"],
   ["utm_medium", "UTM Medium"],
@@ -82,11 +89,7 @@ function csvEscape(v: unknown): string {
   return s;
 }
 
-function downloadCsv<T>(
-  rows: T[],
-  cols: Array<[keyof T, string]>,
-  filename: string,
-) {
+function downloadCsv<T>(rows: T[], cols: Array<[keyof T, string]>, filename: string) {
   const header = cols.map(([, h]) => h).join(",");
   const body = rows.map((r) => cols.map(([k]) => csvEscape(r[k])).join(","));
   const csv = [header, ...body].join("\n");
@@ -108,6 +111,10 @@ function LeadsPage() {
   const [visits, setVisits] = useState<Visit[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [editing, setEditing] = useState<Lead | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -128,14 +135,70 @@ function LeadsPage() {
       else setVisits((vd as Visit[]) || []);
       setLoading(false);
     })();
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, [navigate]);
 
   const signOut = async () => {
     await supabase.auth.signOut();
     navigate({ to: "/auth" });
+  };
+
+  const filteredLeads = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return leads.filter((l) => {
+      if (statusFilter !== "all" && (l.status || "new") !== statusFilter) return false;
+      if (!q) return true;
+      return [l.name, l.email, l.phone, l.project, l.notes, l.message]
+        .some((v) => v && v.toLowerCase().includes(q));
+    });
+  }, [leads, search, statusFilter]);
+
+  const allSelected = filteredLeads.length > 0 && filteredLeads.every((l) => selected.has(l.id));
+  const toggleAll = () => {
+    const next = new Set(selected);
+    if (allSelected) filteredLeads.forEach((l) => next.delete(l.id));
+    else filteredLeads.forEach((l) => next.add(l.id));
+    setSelected(next);
+  };
+  const toggleOne = (id: string) => {
+    const next = new Set(selected);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    setSelected(next);
+  };
+
+  const deleteLead = async (id: string) => {
+    if (!confirm("Delete this lead?")) return;
+    const { error: e } = await supabase.from("leads").delete().eq("id", id);
+    if (e) { alert(e.message); return; }
+    setLeads((prev) => prev.filter((l) => l.id !== id));
+    setSelected((prev) => { const n = new Set(prev); n.delete(id); return n; });
+  };
+
+  const bulkDelete = async () => {
+    if (!selected.size) return;
+    if (!confirm(`Delete ${selected.size} selected lead(s)?`)) return;
+    const ids = [...selected];
+    const { error: e } = await supabase.from("leads").delete().in("id", ids);
+    if (e) { alert(e.message); return; }
+    setLeads((prev) => prev.filter((l) => !selected.has(l.id)));
+    setSelected(new Set());
+  };
+
+  const bulkStatus = async (status: string) => {
+    if (!selected.size) return;
+    const ids = [...selected];
+    const { error: e } = await supabase.from("leads").update({ status }).in("id", ids);
+    if (e) { alert(e.message); return; }
+    setLeads((prev) => prev.map((l) => (selected.has(l.id) ? { ...l, status } : l)));
+  };
+
+  const saveEdit = async (patch: Partial<Lead>) => {
+    if (!editing) return;
+    const { data, error: e } = await supabase
+      .from("leads").update(patch).eq("id", editing.id).select().single();
+    if (e) { alert(e.message); return; }
+    setLeads((prev) => prev.map((l) => (l.id === editing.id ? { ...l, ...(data as Lead) } : l)));
+    setEditing(null);
   };
 
   const countryStats = useMemo(() => {
@@ -183,28 +246,76 @@ function LeadsPage() {
 
         {!loading && tab === "leads" && (
           <>
-            <div className="mb-3 flex justify-end">
-              <button
-                onClick={() => downloadCsv(leads, LEAD_COLS, "leads")}
-                disabled={!leads.length}
-                className="rounded border border-border px-4 py-2 text-sm hover:bg-accent disabled:opacity-50"
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search name, email, phone, notes…"
+                className="rounded-md border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring min-w-[260px]"
+              />
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="rounded-md border border-border bg-background px-3 py-2 text-sm"
               >
-                Export CSV
-              </button>
+                <option value="all">All statuses</option>
+                {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+              <div className="ml-auto flex flex-wrap gap-2">
+                {selected.size > 0 && (
+                  <>
+                    <span className="text-sm text-muted-foreground self-center">{selected.size} selected</span>
+                    <select
+                      onChange={(e) => { if (e.target.value) { bulkStatus(e.target.value); e.target.value = ""; } }}
+                      className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+                      defaultValue=""
+                    >
+                      <option value="">Set status…</option>
+                      {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                    <button
+                      onClick={bulkDelete}
+                      className="rounded border border-destructive text-destructive px-4 py-2 text-sm hover:bg-destructive hover:text-destructive-foreground"
+                    >
+                      Delete selected
+                    </button>
+                  </>
+                )}
+                <button
+                  onClick={() => downloadCsv(filteredLeads, LEAD_COLS, "leads")}
+                  disabled={!filteredLeads.length}
+                  className="rounded border border-border px-4 py-2 text-sm hover:bg-accent disabled:opacity-50"
+                >
+                  Export CSV
+                </button>
+              </div>
             </div>
             <div className="overflow-x-auto rounded border border-border">
               <table className="w-full text-left text-sm">
                 <thead className="bg-muted text-muted-foreground">
-                  <tr>{LEAD_COLS.map(([, h]) => <th key={h} className="px-3 py-2 font-medium whitespace-nowrap">{h}</th>)}</tr>
+                  <tr>
+                    <th className="px-3 py-2 w-8">
+                      <input type="checkbox" checked={allSelected} onChange={toggleAll} />
+                    </th>
+                    {LEAD_COLS.map(([, h]) => <th key={h} className="px-3 py-2 font-medium whitespace-nowrap">{h}</th>)}
+                    <th className="px-3 py-2 font-medium">Actions</th>
+                  </tr>
                 </thead>
                 <tbody>
-                  {leads.map((l) => (
+                  {filteredLeads.map((l) => (
                     <tr key={l.id} className="border-t border-border align-top">
+                      <td className="px-3 py-2">
+                        <input type="checkbox" checked={selected.has(l.id)} onChange={() => toggleOne(l.id)} />
+                      </td>
                       <td className="px-3 py-2 whitespace-nowrap">{new Date(l.created_at).toLocaleString()}</td>
                       <td className="px-3 py-2">{l.name}</td>
                       <td className="px-3 py-2">{l.email}</td>
                       <td className="px-3 py-2">{l.phone}</td>
                       <td className="px-3 py-2">{l.project || "—"}</td>
+                      <td className="px-3 py-2">
+                        <span className="rounded-full bg-muted px-2 py-0.5 text-xs">{l.status || "new"}</span>
+                      </td>
+                      <td className="px-3 py-2 max-w-xs truncate" title={l.notes || ""}>{l.notes || "—"}</td>
                       <td className="px-3 py-2">{l.source}</td>
                       <td className="px-3 py-2">{l.utm_source || "—"}</td>
                       <td className="px-3 py-2">{l.utm_medium || "—"}</td>
@@ -213,10 +324,24 @@ function LeadsPage() {
                       <td className="px-3 py-2">{l.utm_content || "—"}</td>
                       <td className="px-3 py-2 max-w-xs truncate">{l.referrer || "—"}</td>
                       <td className="px-3 py-2 max-w-xs truncate">{l.landing_page || "—"}</td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        <button
+                          onClick={() => setEditing(l)}
+                          className="rounded border border-border px-2 py-1 text-xs hover:bg-accent mr-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => deleteLead(l.id)}
+                          className="rounded border border-destructive text-destructive px-2 py-1 text-xs hover:bg-destructive hover:text-destructive-foreground"
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))}
-                  {!leads.length && (
-                    <tr><td colSpan={LEAD_COLS.length} className="px-3 py-8 text-center text-muted-foreground">No leads yet.</td></tr>
+                  {!filteredLeads.length && (
+                    <tr><td colSpan={LEAD_COLS.length + 2} className="px-3 py-8 text-center text-muted-foreground">No leads.</td></tr>
                   )}
                 </tbody>
               </table>
@@ -275,6 +400,50 @@ function LeadsPage() {
         )}
 
         {tab === "builder" && <UtmBuilder />}
+      </div>
+
+      {editing && <EditModal lead={editing} onClose={() => setEditing(null)} onSave={saveEdit} />}
+    </div>
+  );
+}
+
+function EditModal({ lead, onClose, onSave }: { lead: Lead; onClose: () => void; onSave: (p: Partial<Lead>) => void }) {
+  const [form, setForm] = useState({
+    name: lead.name,
+    email: lead.email,
+    phone: lead.phone,
+    project: lead.project || "",
+    status: lead.status || "new",
+    notes: lead.notes || "",
+  });
+  const input = "w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring";
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
+      <div className="w-full max-w-lg rounded-lg border border-border bg-card p-6 text-card-foreground" onClick={(e) => e.stopPropagation()}>
+        <h2 className="mb-4 text-lg font-semibold">Edit Lead</h2>
+        <div className="grid gap-3">
+          <label className="block"><span className="text-xs font-medium">Name</span>
+            <input className={input} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></label>
+          <label className="block"><span className="text-xs font-medium">Email</span>
+            <input className={input} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></label>
+          <label className="block"><span className="text-xs font-medium">Phone</span>
+            <input className={input} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} /></label>
+          <label className="block"><span className="text-xs font-medium">Project</span>
+            <input className={input} value={form.project} onChange={(e) => setForm({ ...form, project: e.target.value })} /></label>
+          <label className="block"><span className="text-xs font-medium">Status</span>
+            <select className={input} value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>
+              {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
+            </select></label>
+          <label className="block"><span className="text-xs font-medium">Notes</span>
+            <textarea className={input} rows={4} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} /></label>
+        </div>
+        <div className="mt-5 flex justify-end gap-2">
+          <button onClick={onClose} className="rounded border border-border px-4 py-2 text-sm hover:bg-accent">Cancel</button>
+          <button
+            onClick={() => onSave({ ...form, project: form.project || null, notes: form.notes || null })}
+            className="btn-primary"
+          >Save</button>
+        </div>
       </div>
     </div>
   );
@@ -351,11 +520,7 @@ function UtmBuilder() {
         <div className="mt-1 break-all rounded border border-border bg-muted px-3 py-2 text-sm">
           {built || <span className="text-muted-foreground">Enter a valid destination URL…</span>}
         </div>
-        <button
-          onClick={copy}
-          disabled={!built}
-          className="btn-primary mt-3 disabled:opacity-50"
-        >
+        <button onClick={copy} disabled={!built} className="btn-primary mt-3 disabled:opacity-50">
           {copied ? "Copied!" : "Copy link"}
         </button>
       </div>
