@@ -132,7 +132,7 @@ const styles = `
 .bnw .rationale-head h3{margin:0 auto;color:var(--white);font-size:clamp(36px,4.6vw,64px)}
 .bnw .rationale-lead{margin:16px auto 0;max-width:640px;color:var(--muted);font-size:14px;line-height:1.75}
 .bnw .rationale-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.bnw .reason-card{min-height:220px;border:1px solid rgba(217,180,92,.28);background:rgba(8,8,6,.72);padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 18px 50px rgba(0,0,0,.2)}
+.bnw .reason-card{min-height:220px;border:1px solid rgba(217,180,92,.28);background:rgba(8,8,6,.72);padding:24px;display:flex;flex-direction:column;justify-content:flex-start;gap:28px;box-shadow:0 18px 50px rgba(0,0,0,.2)}
 .bnw .reason-card b{font-family:var(--serif);font-size:34px;line-height:1;color:var(--gold-soft);font-weight:600}
 .bnw .reason-card h4{font-size:18px;line-height:1.2;color:var(--white);margin:18px 0 8px}
 .bnw .reason-card p{color:var(--muted);font-size:13px;line-height:1.62}
