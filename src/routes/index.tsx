@@ -143,7 +143,7 @@ const styles = `
 .bnw .project:hover{transform:translateY(-3px);border-color:rgba(217,180,92,.58)}
 .bnw .project-media{position:relative;min-height:440px;background:#111;overflow:hidden}
 .bnw .project-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.54))}
-.bnw .project:nth-child(1) .project-media{background:#0a0a0a url('/__l5e/assets-v1/a2d195f3-c640-49c2-b9cf-3e4535bac36d/orvessa-v3.png') center center/cover no-repeat}
+.bnw .project:nth-child(1) .project-media{background:#0a0a0a url('/__l5e/assets-v1/a2d195f3-c640-49c2-b9cf-3e4535bac36d/orvessa-v3.png') center center/contain no-repeat}
 .bnw .project:nth-child(2) .project-media{background:url('/__l5e/assets-v1/999e049e-58c2-4b15-adaf-1e19b9f14572/taj.png') center/cover no-repeat}
 .bnw .project:nth-child(3) .project-media{background:url('/__l5e/assets-v1/dee350d8-346a-4519-a2c1-44660551db30/radisson.png') center/cover no-repeat}
 .bnw .project:nth-child(4) .project-media{background:url('/__l5e/assets-v1/3027eff9-81ea-4e87-a3b4-1176d144d00c/tonino.png') center/cover no-repeat}
