@@ -54,17 +54,19 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
     "w-full rounded-md border border-border bg-background px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:py-2 sm:text-sm";
 
   return (
-    <form onSubmit={onSubmit} className={compact ? "space-y-10" : "space-y-12"}>
-      <input name="name" required autoComplete="name" placeholder="Full name" className={inputCls} />
-      <input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="Email" className={inputCls} />
-      <input name="phone" required autoComplete="tel" inputMode="tel" placeholder="Phone" className={inputCls} />
-      <select name="project" defaultValue={defaultProject} className={inputCls}>
-        <option value="">Project of interest</option>
-        {PROJECTS.map((p) => (
-          <option key={p} value={p}>{p}</option>
-        ))}
-      </select>
-      <textarea name="message" placeholder="Message (optional)" rows={3} className={inputCls} />
+    <form onSubmit={onSubmit} className="flex flex-col" style={{ gap: compact ? "34px" : "42px" }}>
+      <div className="flex flex-col" style={{ gap: compact ? "26px" : "34px" }}>
+        <input name="name" required autoComplete="name" placeholder="Full name" className={inputCls} />
+        <input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="Email" className={inputCls} />
+        <input name="phone" required autoComplete="tel" inputMode="tel" placeholder="Phone" className={inputCls} />
+        <select name="project" defaultValue={defaultProject} className={inputCls}>
+          <option value="">Project of interest</option>
+          {PROJECTS.map((p) => (
+            <option key={p} value={p}>{p}</option>
+          ))}
+        </select>
+        <textarea name="message" placeholder="Message (optional)" rows={3} className={inputCls} />
+      </div>
       <label className="flex items-start gap-3 text-xs text-muted-foreground pt-6" style={{ marginBottom: "16px" }}>
         <input type="checkbox" name="consent_contact" required className="mt-1 h-4 w-4 shrink-0" />
         <span>I consent to being contacted via email and phone about my enquiry.</span>
