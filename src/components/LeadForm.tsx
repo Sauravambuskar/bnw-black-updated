@@ -90,7 +90,7 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
       <button
         type="submit"
         disabled={loading}
-        className="mt-8 w-full rounded-none px-10 py-5 text-sm font-bold uppercase tracking-[0.18em] text-[#151008] transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="mt-2 w-full rounded-none px-10 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#151008] transition-opacity hover:opacity-90 disabled:opacity-60"
         style={{ background: "#d9b45c" }}
       >
         {loading ? "Sending…" : "Send Request"}
