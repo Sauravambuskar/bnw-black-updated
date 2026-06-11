@@ -67,11 +67,11 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
         </select>
         <textarea name="message" placeholder="Message (optional)" rows={3} className={inputCls} />
       </div>
-      <label className="flex items-start gap-3 text-xs text-muted-foreground pt-6" style={{ marginBottom: "16px" }}>
+      <label className="flex items-start gap-3 text-xs text-muted-foreground pt-2">
         <input type="checkbox" name="consent_contact" required className="mt-1 h-4 w-4 shrink-0" />
         <span>I consent to being contacted via email and phone about my enquiry.</span>
       </label>
-      <label className="flex items-start gap-3 text-xs text-muted-foreground" style={{ marginBottom: "16px" }}>
+      <label className="flex items-start gap-3 text-xs text-muted-foreground">
         <input type="checkbox" name="consent_privacy" required className="mt-1 h-4 w-4 shrink-0" />
         <span>
           I have read and agree to the{" "}
