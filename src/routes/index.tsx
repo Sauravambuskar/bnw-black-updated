@@ -142,6 +142,7 @@ const styles = `
 .bnw .project{min-height:440px;position:relative;overflow:hidden;border:1px solid rgba(217,180,92,.3);background:#111;display:grid;grid-template-columns:minmax(320px,.74fr) 1fr;transition:transform .25s ease,border-color .25s ease}
 .bnw .project:hover{transform:translateY(-3px);border-color:rgba(217,180,92,.58)}
 .bnw .project-media{position:relative;min-height:440px;background:#111;overflow:hidden}
+.bnw .project:nth-child(1) .project-media:after{display:none}
 .bnw .project-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.54))}
 .bnw .project:nth-child(1) .project-media{background:#0a0a0a url('/__l5e/assets-v1/a2d195f3-c640-49c2-b9cf-3e4535bac36d/orvessa-v3.png') center center/contain no-repeat}
 .bnw .project:nth-child(2) .project-media{background:url('/__l5e/assets-v1/999e049e-58c2-4b15-adaf-1e19b9f14572/taj.png') center/cover no-repeat}
