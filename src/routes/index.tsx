@@ -4,6 +4,7 @@ import { BrochureGate } from "@/components/BrochureGate";
 import bnwLogo from "@/assets/bnw-logo.png.asset.json";
 
 const BROCHURES: Record<string, string> = {
+  "Orvessa Residences": "/__l5e/assets-v1/ef8baf8e-84d3-44f9-b059-9c09600245bd/Orvessa-Residences-Brochure.pdf",
   "Taj Wellington Mews": "https://bnwlpage.lovable.app/__l5e/assets-v1/737d88f6-8ff7-4458-af7f-4461d2db563a/taj-brochure.pdf",
   "Tonino Lamborghini Residences": "https://bnwlpage.lovable.app/__l5e/assets-v1/1c79d913-4ac8-45ef-bfa0-27a695f23626/lamborghini-brochure.pdf",
   "Radisson Blu Dubai Central": "https://bnwlpage.lovable.app/__l5e/assets-v1/69fd792f-c6e8-4345-a5ab-b04fed2f69b5/radisson-brochure.pdf",
