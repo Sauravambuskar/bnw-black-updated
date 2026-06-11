@@ -15,7 +15,7 @@ export const Route = createFileRoute("/leads")({
 interface Lead {
   id: string;
   created_at: string;
-  updated_at?: string | null;
+  
   name: string;
   email: string;
   phone: string;
