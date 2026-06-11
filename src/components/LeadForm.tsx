@@ -54,7 +54,7 @@ export function LeadForm({ defaultProject = "", compact = false }: Props) {
     "w-full rounded-md border border-border bg-background px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring sm:py-2 sm:text-sm";
 
   return (
-    <form onSubmit={onSubmit} className={compact ? "space-y-4" : "space-y-5"}>
+    <form onSubmit={onSubmit} className={compact ? "space-y-6" : "space-y-7"}>
       <input name="name" required autoComplete="name" placeholder="Full name" className={inputCls} />
       <input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="Email" className={inputCls} />
       <input name="phone" required autoComplete="tel" inputMode="tel" placeholder="Phone" className={inputCls} />
