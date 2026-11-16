@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LeadForm } from "@/components/LeadForm";
 import { BrochureGate } from "@/components/BrochureGate";
-import bnwLogo from "@/assets/bnw-logo.png.asset.json";
+import { MEDIA } from "@/lib/media";
 
 const BROCHURES: Record<string, string> = {
-  "Orvessa Residences": "/__l5e/assets-v1/ef8baf8e-84d3-44f9-b059-9c09600245bd/Orvessa-Residences-Brochure.pdf",
-  "Taj Wellington Mews": "https://bnwlpage.lovable.app/__l5e/assets-v1/737d88f6-8ff7-4458-af7f-4461d2db563a/taj-brochure.pdf",
-  "Tonino Lamborghini Residences": "https://bnwlpage.lovable.app/__l5e/assets-v1/1c79d913-4ac8-45ef-bfa0-27a695f23626/lamborghini-brochure.pdf",
-  "Radisson Blu Dubai Central": "https://bnwlpage.lovable.app/__l5e/assets-v1/69fd792f-c6e8-4345-a5ab-b04fed2f69b5/radisson-brochure.pdf",
+  "Orvessa Residences": MEDIA.brochures.orvessa,
+  "Taj Wellington Mews": MEDIA.brochures.taj,
+  "Tonino Lamborghini Residences": MEDIA.brochures.lamborghini,
+  "Radisson Blu Dubai Central": MEDIA.brochures.radisson,
 };
 
 export const Route = createFileRoute("/")({
@@ -61,7 +61,7 @@ const styles = `
 .bnw .nav-action{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 18px;border:1px solid var(--gold);background:var(--gold);color:#151008;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:.25s ease;cursor:pointer}
 .bnw .nav-action:hover{background:var(--gold-soft);transform:translateY(-1px)}
 .bnw .hero{position:relative;min-height:calc(100vh - 20px);display:grid;grid-template-columns:minmax(0,1.02fr) minmax(360px,.66fr);gap:36px;align-items:center;padding:88px clamp(20px,5vw,76px) 22px;overflow:hidden}
-.bnw .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 22%,rgba(217,180,92,.24),transparent 28%),linear-gradient(90deg,rgba(5,5,4,.98) 0%,rgba(8,8,6,.86) 52%,rgba(8,8,6,.54) 100%),url('https://bnw.ae/_next/static/media/tl1.5d03a922.jpg') center/cover no-repeat;opacity:.94}
+.bnw .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 22%,rgba(217,180,92,.24),transparent 28%),linear-gradient(90deg,rgba(5,5,4,.98) 0%,rgba(8,8,6,.86) 52%,rgba(8,8,6,.54) 100%),url('${MEDIA.backgrounds.hero}') center/cover no-repeat;opacity:.94}
 .bnw .hero:after{content:"";position:absolute;inset:auto 0 0;height:26vh;background:linear-gradient(180deg,transparent,var(--ink))}
 .bnw .hero-copy,.bnw .lead-panel{position:relative;z-index:2}
 .bnw .eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold-soft);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
@@ -104,14 +104,14 @@ const styles = `
 .bnw .submit:hover{background:var(--gold-soft)}
 .bnw .privacy{font-size:10px;color:#8d836f;text-align:center;margin-top:9px;line-height:1.45}
 .bnw .destination{position:relative;padding:70px clamp(20px,5vw,76px);background:#050504;overflow:hidden;border-top:1px solid rgba(217,180,92,.12);border-bottom:1px solid rgba(217,180,92,.12)}
-.bnw .destination:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,4,.84),rgba(5,5,4,.78)),url('https://bnw.ae/_next/static/media/whyBnwDevelopment.bd4ce625.png') center/cover no-repeat;opacity:.78}
+.bnw .destination:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,4,.84),rgba(5,5,4,.78)),url('${MEDIA.backgrounds.destination}') center/cover no-repeat;opacity:.78}
 .bnw .destination-inner{position:relative;z-index:1;max-width:980px;margin:0 auto;text-align:center}
 .bnw .destination-kicker{color:var(--gold);font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
 .bnw .destination-quote{font-family:var(--serif);font-size:clamp(34px,4.1vw,58px);line-height:1.04;color:var(--white);max-width:900px;margin:0 auto}
 .bnw .destination-quote em{color:var(--gold-soft);font-style:italic}
 .bnw .destination-note{margin:18px auto 0;color:var(--muted);font-size:14px;line-height:1.7;max-width:620px}
 .bnw .wynn-section{position:relative;padding:64px clamp(20px,5vw,76px);background:#050504;border-top:1px solid rgba(217,180,92,.16);border-bottom:1px solid rgba(217,180,92,.16);overflow:hidden}
-.bnw .wynn-inner{position:relative;min-height:620px;border:1px solid rgba(217,180,92,.3);background:linear-gradient(90deg,rgba(5,5,4,.9) 0%,rgba(5,5,4,.66) 44%,rgba(5,5,4,.18) 100%),url('https://preview.thenewsmarket.com/Previews/WYNN/StillAssets/1920x1080/667364_v4.jpg') center/cover no-repeat;box-shadow:0 32px 90px rgba(0,0,0,.42);display:grid;grid-template-columns:minmax(0,.72fr) minmax(300px,.42fr);gap:28px;align-items:end;padding:42px}
+.bnw .wynn-inner{position:relative;min-height:620px;border:1px solid rgba(217,180,92,.3);background:linear-gradient(90deg,rgba(5,5,4,.9) 0%,rgba(5,5,4,.66) 44%,rgba(5,5,4,.18) 100%),url('${MEDIA.backgrounds.wynn}') center/cover no-repeat;box-shadow:0 32px 90px rgba(0,0,0,.42);display:grid;grid-template-columns:minmax(0,.72fr) minmax(300px,.42fr);gap:28px;align-items:end;padding:42px}
 .bnw .wynn-kicker{color:var(--gold-soft);font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
 .bnw .wynn-title{font-family:var(--serif);font-size:clamp(38px,4.5vw,62px);line-height:.96;color:var(--white);max-width:650px}
 .bnw .wynn-title em{color:var(--gold-soft);font-style:italic}
@@ -127,7 +127,7 @@ const styles = `
 .bnw h3{font-family:var(--serif);font-size:clamp(38px,5vw,68px);line-height:.98;font-weight:600;max-width:760px;color:var(--white)}
 .bnw .section-intro{max-width:560px;color:var(--muted);line-height:1.75;font-size:15px}
 .bnw .rationale-section{position:relative;padding:86px clamp(20px,5vw,76px);background:#050504;overflow:hidden}
-.bnw .rationale-section:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,4,.8),rgba(5,5,4,.92)),url('https://bnw.ae/_next/static/media/embrace.0ee07077.jpg') center/cover no-repeat;opacity:.9}
+.bnw .rationale-section:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,4,.8),rgba(5,5,4,.92)),url('${MEDIA.backgrounds.rationale}') center/cover no-repeat;opacity:.9}
 .bnw .rationale-wrap{position:relative;z-index:1;max-width:1220px;margin:0 auto}
 .bnw .rationale-head{text-align:center;max-width:850px;margin:0 auto 34px}
 .bnw .rationale-head h3{margin:0 auto;color:var(--white);font-size:clamp(36px,4.6vw,64px)}
@@ -144,10 +144,10 @@ const styles = `
 .bnw .project-media{position:relative;min-height:440px;background:#111;overflow:hidden}
 .bnw .project:nth-child(1) .project-media:after{display:none}
 .bnw .project-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.54))}
-.bnw .project:nth-child(1) .project-media{background:#0a0a0a url('/__l5e/assets-v1/a2d195f3-c640-49c2-b9cf-3e4535bac36d/orvessa-v3.png') center center/contain no-repeat}
-.bnw .project:nth-child(2) .project-media{background:url('/__l5e/assets-v1/999e049e-58c2-4b15-adaf-1e19b9f14572/taj.png') center/cover no-repeat}
-.bnw .project:nth-child(3) .project-media{background:url('/__l5e/assets-v1/dee350d8-346a-4519-a2c1-44660551db30/radisson.png') center/cover no-repeat}
-.bnw .project:nth-child(4) .project-media{background:url('/__l5e/assets-v1/3027eff9-81ea-4e87-a3b4-1176d144d00c/tonino.png') center/cover no-repeat}
+.bnw .project:nth-child(1) .project-media{background:#0a0a0a url('${MEDIA.projects.orvessa}') center center/contain no-repeat}
+.bnw .project:nth-child(2) .project-media{background:url('${MEDIA.projects.taj}') center/cover no-repeat}
+.bnw .project:nth-child(3) .project-media{background:url('${MEDIA.projects.radisson}') center/cover no-repeat}
+.bnw .project:nth-child(4) .project-media{background:url('${MEDIA.projects.tonino}') center/cover no-repeat}
 .bnw .project-content{position:relative;padding:42px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(12,11,8,.98),rgba(22,18,10,.92))}
 .bnw .project-index{position:absolute;top:28px;right:34px;font-family:var(--serif);font-size:46px;line-height:.9;color:rgba(240,213,139,.54)}
 .bnw .tag{display:inline-block;width:max-content;border:1px solid rgba(217,180,92,.45);color:var(--gold-soft);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:8px 10px;margin-bottom:18px}
@@ -278,7 +278,7 @@ function Index() {
       <div className="page">
         <nav className="nav">
           <a href="#opportunity" aria-label="BNW Developments home">
-            <img src={bnwLogo.url} alt="BNW Developments" className="brand-logo" />
+            <img src={MEDIA.brand.logo} alt="BNW Developments" className="brand-logo" />
           </a>
           <ul className="nav-links">
             <li><a href="#opportunity">Opportunity</a></li>
@@ -419,7 +419,7 @@ function Index() {
         </section>
 
         <footer className="footer">
-          <img src={bnwLogo.url} alt="BNW Developments" className="brand-logo" />
+          <img src={MEDIA.brand.logo} alt="BNW Developments" className="brand-logo" />
           <p>BNW Developments investor information. Possible returns are projections and not guaranteed; final details are subject to availability, fees, and market conditions.</p>
         </footer>
       </div>

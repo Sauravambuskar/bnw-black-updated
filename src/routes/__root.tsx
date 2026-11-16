@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { MEDIA, absoluteMedia } from "../lib/media";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -87,14 +88,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Lovable App" },
       { name: "twitter:description", content: "Golden Returns is an investment platform for branded residences in the UAE." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5c50bfa7-ebfa-4462-a5ef-7029db3dcaf7/id-preview-b4973e5d--a3bc87b4-39a3-465e-8ab8-6fd2537a37f9.lovable.app-1780946369080.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5c50bfa7-ebfa-4462-a5ef-7029db3dcaf7/id-preview-b4973e5d--a3bc87b4-39a3-465e-8ab8-6fd2537a37f9.lovable.app-1780946369080.png" },
+      { property: "og:image", content: absoluteMedia(MEDIA.brand.ogPreview) },
+      { name: "twitter:image", content: absoluteMedia(MEDIA.brand.ogPreview) },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "icon", type: "image/png", href: MEDIA.brand.logo },
+      { rel: "apple-touch-icon", href: MEDIA.brand.logo },
     ],
   }),
   shellComponent: RootShell,
