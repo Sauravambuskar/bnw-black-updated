@@ -1,0 +1,56 @@
+name: Sync Supabase to MySQL
+
+# Keeps the Hostinger MySQL mirror in step with Supabase.
+# Supabase stays the source of truth; this job only ever reads from it.
+#
+# Before this can run, add these repository secrets
+# (Settings -> Secrets and variables -> Actions):
+#   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
+#   MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
+#
+# Until those exist the job fails fast with a clear message and changes nothing.
+
+on:
+  schedule:
+    - cron: "0 * * * *" # hourly, on the hour (UTC)
+  workflow_dispatch: # allows a manual run from the Actions tab
+    inputs:
+      full:
+        description: "Re-read every row instead of only new ones"
+        type: boolean
+        default: false
+
+concurrency:
+  group: sync-mysql
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run sync
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+        run: |
+          if [ "${{ inputs.full }}" = "true" ]; then
+            node scripts/sync-supabase-to-mysql.mjs --full
+          else
+            node scripts/sync-supabase-to-mysql.mjs
+          fi
