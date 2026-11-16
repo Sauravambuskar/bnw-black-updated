@@ -33,3 +33,6 @@ dist-ssr
 
 # Local sync credentials (never commit)
 .env.sync
+
+.vercel
+.env*

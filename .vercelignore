@@ -1,0 +1,17 @@
+# Vercel must use bun.lock (the lockfile the repo tracks), not pnpm.
+# These pnpm files are local-only debugging artifacts.
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# Build output - Vercel builds fresh
+dist
+.output
+.nitro
+.tanstack
+node_modules
+
+# Local secrets
+.env.sync
+
+# built fresh on Vercel
+.vercel/output
